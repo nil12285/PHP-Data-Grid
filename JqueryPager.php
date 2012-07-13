@@ -10,7 +10,7 @@
  * @since 5/06/2010
  **/
 
-class Jquerypager {
+class JqueryPager {
     
     var $idPager;
     var $pageSize;
