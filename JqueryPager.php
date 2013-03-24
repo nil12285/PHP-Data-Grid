@@ -58,22 +58,16 @@ class Jquerypager {
     
     protected $gridDivId;
     
-	/**
+    /**
      * Initializes all pager variables
-	 * @name Constructor
-	 * @param PagerId
-	 **/
-    //function __construct($jqplugin=''){
+     * @name Constructor
+     * @param PagerId
+     **/
     function __construct(){        
 	   $this->header = array();
        $this->thData = array();
        $this->tdData = array();
-       $this->records = array();
-       /*if(!empty($jqplugin)){
-        $this->plugin = $jqplugin;
-        print_r($jqplugin);
-       }
-       */       
+       $this->records = array();              
        $this->title = "";
        $this->buttons = "";	
        $this->dlgFlag = false;
@@ -91,10 +85,10 @@ class Jquerypager {
     
     /**
      * Assign Value to pager variables
-	 * @name setRemotePaging
-	 * @param $pageSource=remore url; $pagesize;
+     * @name setRemotePaging
+     * @param $pageSource=remore url; $pagesize;
      * @since 5/06/2010
-	 **/ 
+     **/ 
     function setRemotePaging($pageSource='',$limit=20)
     {
         $this->pagingSource = $pageSource; 
@@ -105,10 +99,10 @@ class Jquerypager {
     
     /**
      * prpare query for remote search, sort and paging
-	 * @name preparePagerQuery
-	 * @param $query='';$select=array();$from=array();$where=array();$orderby=array();
+     * @name preparePagerQuery
+     * @param $query='';$select=array();$from=array();$where=array();$orderby=array();
      * @since 12/27/2010
-	 **/
+     **/
     function preparePagerQuery($query='',$select=array(),$from=array(),$where=array(),$orderby=array())
     {
         $sSearch = $_GET['sSearch'];
@@ -163,10 +157,10 @@ class Jquerypager {
     
     /**
      * Assign Value to pager variables
-	 * @name setPager
-	 * @param $pagesize: number of rows per page; PagerId; Header; RecordSet; $highLight;
+     * @name setPager
+     * @param $pagesize: number of rows per page; PagerId; Header; RecordSet; $highLight;
      * @since 5/06/2010
-	 **/  
+     **/  
     function setPager($pagerID,$pagesize,$header,$data=array(),$highLight=false)
     {        
         $this->idPager = $pagerID;
@@ -188,10 +182,10 @@ class Jquerypager {
     
     /**
      * Set Header
-	 * @name setHeader
-	 * @param $header : array of index=>Displayed_translation, same order as displayed columns 
+     * @name setHeader
+     * @param $header : array of index=>Displayed_translation, same order as displayed columns 
      * @since 5/06/2010
-	 **/
+     **/
     function setHeader($header) {        
 		foreach ($header as $key=>$txt)
 		{
@@ -201,20 +195,20 @@ class Jquerypager {
 	}
     
     /**
-	 * @name setTitle
-	 * @param $title = Pager Title
+     * @name setTitle
+     * @param $title = Pager Title
      * @since 5/06/2010
-	 **/
+     **/
     function setTitle($title) {
 		$this->title = "<h3 class='ui-accordion-header ui-helper-reset ui-state-active ui-corner-top'>".$title."</h3>";
 	}
     
     
     /**
-	 * @name setData
-	 * @param $record : array of index=>Displayed_translation, same order as displayed columns 
+     * @name setData
+     * @param $record : array of index=>Displayed_translation, same order as displayed columns 
      * @since 5/06/2010
-	 **/
+     **/
     function setData($data){
         if(!is_array($data))
             return false;        
@@ -224,10 +218,10 @@ class Jquerypager {
     
     /**
      * May be needed in future
-	 * @name setFooter
-	 * @param $fData : column_key = total where we need sum of it [for now]
+     * @name setFooter
+     * @param $fData : column_key = total where we need sum of it [for now]
      * @since 5/06/2010
-	 **/
+     **/
     function setFooter($fData){
         if(is_array($fData) && !empty($fData)){
             $this->footer = $fData;
@@ -236,11 +230,11 @@ class Jquerypager {
     }
     
     /**
-	 * @name setJqPagerParameter
-	 * @abstract set Parameter for jquery pager
+     * @name setJqPagerParameter
+     * @abstract set Parameter for jquery pager
      * @since 5/10/2010
      * @param $jqUI = 'true'|'false' use jquery ui interface(style), $sort=array('column_index'=>'asc|desc'))
-	 **/
+     **/
     function setJqPagerParameter($jqUI = 'false',$sort=array(),$aoColumns=array(),$searchbar=true,$pagination=true){
         $this->PagerScript =  "
             var RefreshUrl = \"\";
@@ -374,11 +368,11 @@ class Jquerypager {
     
         
     /**
-	 * @name addLink
-	 * @abstract add Link Columns
+     * @name addLink
+     * @abstract add Link Columns
      * @param array of [title]=> 'Action', [text] => 'Edit', [link] => '../admin/subscriber/', [qstring]=>123, [target] => 'new | self | overlay | confirm | popup | jsfunction'
      * @since 5/10/2010
-	 **/
+     **/
     function addLink($data){
         $this->tbLink = $data;        
     }
@@ -386,11 +380,11 @@ class Jquerypager {
     
     
     /**
-	 * @name addLink
-	 * @abstract add Link Columns
+     * @name addLink
+     * @abstract add Link Columns
      * @param array of [title]=> 'Custom Column', [Object] => object|'value', [function] => 'function_name', [param] => array()' for each column
      * @since 5/10/2010
-	 **/
+     **/
     function addCustomColumn($data) {
         foreach($data as $k=>$v) {
             $this->header[$k] = $v;
@@ -401,10 +395,10 @@ class Jquerypager {
     
     /**	
      * differentiate field based upon field value.. field value must be boolean[true|false] or [1|0]
-	 * @name setDifferentiateCoumn 
+     * @name setDifferentiateCoumn 
      * @param $index = column/index of dataset..
      * @since 5/10/2010
-	 **/
+     **/
     function setDifferentiateCoumn($index=''){
         if(!empty($index)){
             $this->differFlag = true;
@@ -415,15 +409,15 @@ class Jquerypager {
     
     /**
      * adds a bottom button for general pager links like a typical ' (+) Add Row ' using jquery-ui css
-	 * @name addButton
+     * @name addButton
      * @param $type = add|add_user|save|break|trash|refresh|mail;
      * @param $text = text on button;
      * @param $link = action url
      * @param $target = 'new | self | overlay | confirm | popup'
      * @param $extra = array(height=>100,width=>200)
-	 **/  
+     **/  
 	function addButton($type,$text="",$link="",$target='blank',$extra=array()){
-	    $this->btnFlag = true;
+        $this->btnFlag = true;
 		$path="/static/images/icons/";
 		$class="";
 		switch ($type){
@@ -461,8 +455,8 @@ class Jquerypager {
     
     /**
      * get Html for diff part of table[head,body,footer]
-	 * @name getHtml
-	 **/    
+     * @name getHtml
+     **/    
     function getHtml()
     {
         if(empty($this->header))
@@ -524,9 +518,9 @@ class Jquerypager {
     
     /**
      * return table body data into json formate for jqueryDatatable
-	 * @name getAjaxData 
+     * @name getAjaxData 
      * @param Array $data; Integer $iTotalRecords;
-	 **/
+     **/
     function getAjaxData($data,$iTotalRecords)
     {
         $aaData = array();
@@ -541,7 +535,7 @@ class Jquerypager {
     	{
             $rowOut = "";
             $aData = array();
-    		foreach($this->header as $hkey=>$hval){    		  
+    		foreach($this->header as $hkey=>$hval){    	      
                 if(isset($hval['object'])) {
                     if(is_object($hval['object'])) {
                         $aRow[$hkey] = $hval['object']->$hval['function']($aRow,$hval['param']);
@@ -558,7 +552,7 @@ class Jquerypager {
                     $link = array(
                                         'baseLink' => $val2['link'],
                                         'qString' => $val2['qstring']
-                    );        	      
+                    );                  
                   array_push($aData,$this->_generateLink($link,$aRow,$val2));
         		}
             }
@@ -572,8 +566,8 @@ class Jquerypager {
     
     
     /**
-	 * print table rows for header,body,footer
-	 * @name print_rows
+     * print table rows for header,body,footer
+     * @name print_rows
      * @param $type = 'header|footer|body'
      **/  
     function print_rows($type,$returnHtml=false)
@@ -674,7 +668,7 @@ class Jquerypager {
     
     /**
      * genrate url string for link from querystring array()
-	 * @name _generateLink 
+     * @name _generateLink 
      * @param $link = array('baseLink'=>'www.abcd.com/home',qString=>array(idUser,idCompany))
      **/ 
     private function _generateLink($link,$data,$linkData)
@@ -798,7 +792,7 @@ class Jquerypager {
     {
         return "
         <div style=\"display:none;\" id=\"dialog-confirm\" title=\"Confirmation\">
-    	   <p><span class=\"ui-icon ui-icon-alert\" style=\"float:left; margin-right:10px;\"></span>Are you sure?</p>
+           <p><span class=\"ui-icon ui-icon-alert\" style=\"float:left; margin-right:10px;\"></span>Are you sure?</p>
         </div>
         
         <div style=\"display:none;\" id=\"dialog-overlay\" title=\"Dialog\">
@@ -809,8 +803,8 @@ class Jquerypager {
         
     
     /**
-	 * @name setOverlayDialogParm    
-	 **/
+     * @name setOverlayDialogParm    
+     **/
     private function _setOverlayDialogParm()
     {
         $this->setupJqueryDialog('dialog-overlay');
